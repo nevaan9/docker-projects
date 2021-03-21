@@ -1,1 +1,2 @@
+# How to start the server locally
 docker build -t bokehtest . && docker run --rm -p 9001:8080 -e PORT=8080 bokehtest
