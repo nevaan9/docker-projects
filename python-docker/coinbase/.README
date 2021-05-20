@@ -1,0 +1,3 @@
+sudo docker build -t coinbase-tracker .
+sudo docker images
+sudo docker run -it coinbase-tracker
