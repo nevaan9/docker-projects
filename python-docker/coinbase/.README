@@ -1,3 +1,5 @@
 sudo docker build -t coinbase-tracker .
 sudo docker images
 sudo docker run -it coinbase-tracker
+
+NOTE: YOU NEED TO ADD A /credentials DIR TO THE ROOT WITH YOUR COINBASE API KEY AND GOOGLE CREDENTIALS
