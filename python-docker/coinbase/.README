@@ -3,3 +3,4 @@ sudo docker images
 sudo docker run -it coinbase-tracker
 
 NOTE: YOU NEED TO ADD A /credentials DIR TO THE ROOT WITH YOUR COINBASE API KEY AND GOOGLE CREDENTIALS
+See here how to setup: https://levelup.gitconnected.com/tracking-your-coinbase-portfolio-performance-using-python-google-sheets-57d86d687547
