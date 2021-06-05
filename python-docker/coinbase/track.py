@@ -1,4 +1,5 @@
 # IMPORTS
+from discord_webhook import DiscordWebhook
 from coinbase.wallet.client import Client
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -412,3 +413,44 @@ spreadsheet_url = "https://docs.google.com/spreadsheets/d/%s" % spreadsheet.id
 # Let user know process has been completed
 print("\n=====Process completed, worksheets filled=====\n"
       "\nTo see results please visit:", spreadsheet_url)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Post to discord
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+try:
+  print('Opening webhook urls json...')
+  # Opening JSON file
+  webhook_url_json = open('./credentials/discord_webhooks.json')
+  # returns JSON object as 
+  # a dictionary
+  webhook_urls = json.load(webhook_url_json)
+  # CREDENTIALS
+  urls = webhook_urls['urls']
+  gain_losses = my_coinbase['current_unrealized_gain']
+  gain_losses_int = int(gain_losses)
+  message_prefix = ''
+  if (gain_losses_int > 0):
+    if (gain_losses_int > 2000):
+        message_prefix = 'OMFG...'
+    elif (gain_losses_int > 1000):
+        message_prefix = 'Im gonna be a milionare...'
+    elif (gain_losses_int > 500):
+        message_prefix = 'Oh yeah baby, drinks on me...'
+    elif (gain_losses_int > 100):
+        message_prefix = 'Hell yeah...'
+    else:
+        message_prefix = 'Woohoo...'
+  else:
+      message_prefix = 'Shit...'
+      if (gain_losses_int < -1000):
+        message_prefix = '@$#! CRYPTO...'
+      elif (gain_losses_int < -100):
+        message_prefix = 'This is BS...'
+  message_content = "{} {}".format(message_prefix, gain_losses)
+  webhook = DiscordWebhook(url=urls, content=message_content)
+  print('Posting gains/losses to Discord...')
+  response = webhook.execute()
+  print('Discord post success!')
+except:
+  print('Something went wrong trying to post to discord!')
