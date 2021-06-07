@@ -430,7 +430,8 @@ try:
   gain_losses = my_coinbase['current_unrealized_gain']
   gain_losses_int = int(gain_losses)
   message_prefix = ''
-  if (gain_losses_int > 0):
+  message_content = ''
+  if (gain_losses_int >= 0):
     if (gain_losses_int > 2000):
         message_prefix = 'OMFG...'
     elif (gain_losses_int > 1000):
@@ -441,14 +442,15 @@ try:
         message_prefix = 'Hell yeah...'
     else:
         message_prefix = 'Woohoo...'
+    message_content = "{} ${}".format(message_prefix, str(round(float(gain_losses), 2)))
   else:
-      if (gain_losses_int < -1000):
+    if (gain_losses_int < -1000):
         message_prefix = '@$#! CRYPTO...'
-      elif (gain_losses_int < -100):
+    elif (gain_losses_int < -100):
         message_prefix = 'This is BS...'
-      else:
-        message_prefix = 'Shit...'
-  message_content = "{} {}".format(message_prefix, str(round(float(gain_losses), 2)))
+    else:
+        message_prefix = 'Shit...'  
+    message_content = "{} -${}".format(message_prefix, str(abs(round(float(gain_losses), 2))))
   webhook = DiscordWebhook(url=urls, content=message_content)
   print('Posting gains/losses to Discord...')
   response = webhook.execute()
