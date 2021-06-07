@@ -447,7 +447,7 @@ try:
         message_prefix = '@$#! CRYPTO...'
       elif (gain_losses_int < -100):
         message_prefix = 'This is BS...'
-  message_content = "{} {}".format(message_prefix, gain_losses)
+  message_content = "{} ${}".format(message_prefix, str(round(gain_losses, 2)))
   webhook = DiscordWebhook(url=urls, content=message_content)
   print('Posting gains/losses to Discord...')
   response = webhook.execute()
