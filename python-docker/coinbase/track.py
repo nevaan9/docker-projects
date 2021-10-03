@@ -1,3 +1,4 @@
+# https://levelup.gitconnected.com/tracking-your-coinbase-portfolio-performance-using-python-google-sheets-57d86d687547
 # IMPORTS
 from discord_webhook import DiscordWebhook
 from coinbase.wallet.client import Client
